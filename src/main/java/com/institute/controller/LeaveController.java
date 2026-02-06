@@ -10,7 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/leave")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://venerable-daifuku-51b305.netlify.app")
 public class LeaveController {
 
     @Autowired

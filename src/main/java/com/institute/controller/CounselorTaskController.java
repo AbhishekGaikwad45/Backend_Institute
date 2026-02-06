@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://venerable-daifuku-51b305.netlify.app")
 public class CounselorTaskController {
 
     @Autowired

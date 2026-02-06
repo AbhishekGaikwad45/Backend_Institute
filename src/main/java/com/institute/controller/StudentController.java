@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/student")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://venerable-daifuku-51b305.netlify.app")
 public class StudentController {
 
     @Autowired

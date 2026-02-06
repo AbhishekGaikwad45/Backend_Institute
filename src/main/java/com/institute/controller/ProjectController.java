@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/project")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://venerable-daifuku-51b305.netlify.app")
 public class ProjectController {
 
     private final StudentProjectService service;

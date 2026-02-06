@@ -12,7 +12,7 @@ import java.util.Map;
 import org.springframework.http.MediaType;
 @RestController
 @RequestMapping("/api/file")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://venerable-daifuku-51b305.netlify.app")
 public class FileUploadController {
 
     @Autowired
