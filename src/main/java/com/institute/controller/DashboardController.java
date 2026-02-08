@@ -27,26 +27,44 @@ public class DashboardController {
 
         Map<String, Object> data = new HashMap<>();
 
-        // OLD DATA
         data.put("totalStudents", studentRepo.count());
         data.put("totalFaculty", facultyRepo.count());
         data.put("activeBatches", batchRepo.count());
 
-        // New admissions this month
+        // Safe defaults
+        data.put("newAdmissions", 0);
+        data.put("todaysEnquiries", 0);
+        data.put("pendingFeesCount", 0);
+        data.put("pendingFeesAmount", 0);
+        data.put("inactiveStudents", 0);
+        data.put("activeAttendanceStudents", 0);
+
         try {
             data.put("newAdmissions", studentRepository.countThisMonthAdmissions());
-        } catch (Exception e) {
-            data.put("newAdmissions", 0);
-        }
+        } catch (Exception ignored) {}
 
-        // NEW DATA
-        data.put("todaysEnquiries", enquiryRepo.countTodayEnquiries());
-        data.put("pendingFeesCount", paymentRepo.pendingStudentCount());
-        data.put("pendingFeesAmount", paymentRepo.pendingAmount());
-        data.put("inactiveStudents", attendanceRepo.inactiveStudents());
-        data.put("activeAttendanceStudents", attendanceRepo.activeStudents());
+        try {
+            data.put("todaysEnquiries", enquiryRepo.countTodayEnquiries());
+        } catch (Exception ignored) {}
+
+        try {
+            data.put("pendingFeesCount", paymentRepo.pendingStudentCount());
+        } catch (Exception ignored) {}
+
+        try {
+            data.put("pendingFeesAmount", paymentRepo.pendingAmount());
+        } catch (Exception ignored) {}
+
+        try {
+            data.put("inactiveStudents", attendanceRepo.inactiveStudents());
+        } catch (Exception ignored) {}
+
+        try {
+            data.put("activeAttendanceStudents", attendanceRepo.activeStudents());
+        } catch (Exception ignored) {}
 
         return data;
     }
+
 }
     
