@@ -32,8 +32,10 @@ public class EnquiryController {
     // Today enquiry count
     @GetMapping("/today-count")
     public int todayCount() {
-        return enquiryRepo.countTodayEnquiries();
+        Integer count = enquiryRepo.countTodayEnquiries();
+        return count != null ? count : 0;
     }
+
 
 
     @GetMapping("/today")

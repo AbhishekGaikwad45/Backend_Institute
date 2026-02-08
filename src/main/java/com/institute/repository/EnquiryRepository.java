@@ -7,15 +7,27 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EnquiryRepository extends JpaRepository<Enquiry, Long> {
-    boolean existsByEmail(String email);
 
+    boolean existsByEmail(String email);
     boolean existsByMobile(String mobile);
 
-    @Query(value = "SELECT COUNT(*) FROM enquiries WHERE created_at = CURRENT_DATE()", nativeQuery = true)
-    int countTodayEnquiries();
+    // ✅ TODAY COUNT (SAFE)
+    @Query(value = """
+        SELECT COALESCE(COUNT(*), 0)
+        FROM enquiries
+        WHERE created_at IS NOT NULL
+          AND DATE(created_at) = CURRENT_DATE
+    """, nativeQuery = true)
+    Integer countTodayEnquiries();
 
-    @Query("SELECT e FROM Enquiry e WHERE e.createdAt = CURRENT_DATE")
+    // ✅ TODAY ENQUIRIES (SAFE)
+    @Query("""
+        SELECT e
+        FROM Enquiry e
+        WHERE e.createdAt IS NOT NULL
+          AND FUNCTION('DATE', e.createdAt) = CURRENT_DATE
+    """)
     List<Enquiry> findTodayEnquiries();
-
 }
+
 
